@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'presentation/ui/home_page.dart';
+import 'presentation/utils/navigator.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -14,6 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      navigatorKey: navigator.key,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

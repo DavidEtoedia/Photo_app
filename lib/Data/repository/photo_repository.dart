@@ -1,7 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/repository/i_repo.dart';
+import 'package:photo_app/Data/services/model/photo_by_id.dart';
+import 'package:photo_app/Data/services/model/photo_by_tag.dart';
 import 'package:photo_app/Data/services/photo_services.dart';
-import 'package:photo_app/Data/services/photos.dart';
+import 'package:photo_app/Data/services/model/photos.dart';
 
 final photoProvider = Provider<PhotoRepository>((ref) {
   final photoService = ref.watch(photoServiceProvider);
@@ -17,5 +19,17 @@ class PhotoRepository extends IRepository {
   Future<List<Photos>> getPhoto() async {
     final photo = await _photoServices.getPhoto();
     return photo;
+  }
+
+  @override
+  Future<PhotosById> photoById(String photoId) async {
+    final id = await _photoServices.photoById(photoId);
+    return id;
+  }
+
+  @override
+  Future<PhotoByTag> photoByTag(String tag) async {
+    final tagg = await _photoServices.photoByTag(tag);
+    return tagg;
   }
 }
