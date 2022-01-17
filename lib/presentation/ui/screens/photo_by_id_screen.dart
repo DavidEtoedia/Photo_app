@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
+import 'package:intl/intl.dart' show NumberFormat, toBeginningOfSentenceCase;
 import 'package:photo_app/presentation/ui/screens/photo_by_tag_screen.dart';
 
 import 'package:photo_app/presentation/ui/vm/photos_by_id_vm.dart';
@@ -30,6 +30,7 @@ class SinglePhotoView extends HookConsumerWidget {
             return Text(error.toString());
           },
           data: (value) {
+            final number = NumberFormat("#,###", "en_US");
             return SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(
                   parent: BouncingScrollPhysics()),
@@ -139,47 +140,68 @@ class SinglePhotoView extends HookConsumerWidget {
                     height: 10,
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 20, right: 20),
-                    child: Row(
+                    margin: const EdgeInsets.only(left: 10, right: 12),
+                    child: Flex(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      direction: Axis.horizontal,
                       children: [
                         RichText(
                           text: TextSpan(
-                            text: 'Views:   ',
+                            text: 'Views:  ',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.grey[600]),
                             children: [
                               TextSpan(
-                                  text: value.views.toString(),
+                                  text: number.format(value.views),
                                   style: const TextStyle(
                                       color: Colors.black87,
                                       fontWeight: FontWeight.w600)),
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 20,
-                        ),
+                        const Spacer(),
                         RichText(
                           text: TextSpan(
-                            text: 'Downloads:   ',
+                            text: 'Downloads: ',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.grey[600]),
                             children: [
                               TextSpan(
-                                  text: value.downloads.toString(),
+                                  text: number.format(value.downloads),
                                   style: const TextStyle(
                                       color: Colors.black87,
                                       fontWeight: FontWeight.w600)),
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 20,
+                        const Spacer(),
+                        // const SizedBox(
+                        //   width: 20,
+                        // ),
+                        RichText(
+                          text: TextSpan(
+                            text: 'Likes: ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey[600]),
+                            children: [
+                              TextSpan(
+                                  text: number.format(value.likes),
+                                  style: const TextStyle(
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.w600)),
+                            ],
+                          ),
                         ),
+                        // const SizedBox(
+                        //   width: 20,
+                        // ),
                       ],
                     ),
                   ),
