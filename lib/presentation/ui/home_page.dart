@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photo_app/presentation/ui/screens/new_list.dart';
 import 'package:photo_app/presentation/ui/widgets/photo_list.dart';
 
 class HomePage extends HookConsumerWidget {
@@ -11,15 +12,16 @@ class HomePage extends HookConsumerWidget {
         appBar: AppBar(),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            SizedBox(
+          children: [
+            const SizedBox(
               height: 30,
             ),
-            UnsplashTitle(),
-            SizedBox(
+            const UnsplashTitle(),
+            const SizedBox(
               height: 20,
             ),
-            PhotoList()
+            NewList()
+            // PhotoList()
           ],
         ));
   }

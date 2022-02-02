@@ -14,5 +14,6 @@ class PhotoVM extends RequestStateNotifier<List<Photos>> {
     getPhoto();
   }
 
-  void getPhoto() => makeRequest(() => _photoRepository.getPhoto());
+  void getPhoto([int currentPage = 1]) =>
+      makeRequest(() => _photoRepository.getPhoto(currentPage));
 }

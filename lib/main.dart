@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:photo_app/presentation/locator.dart';
 import 'presentation/ui/home_page.dart';
+import 'presentation/utils/app_observer.dart';
 import 'presentation/utils/navigator.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(ProviderScope(observers: [Logger()], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
