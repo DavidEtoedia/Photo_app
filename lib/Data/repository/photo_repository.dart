@@ -16,8 +16,8 @@ class PhotoRepository extends IRepository {
   PhotoRepository(this._photoServices);
 
   @override
-  Future<List<Photos>> getPhoto() async {
-    final photo = await _photoServices.getPhoto();
+  Future<List<Photos>> getPhoto([int page = 1]) async {
+    final photo = await _photoServices.getPhoto(page);
     return photo;
   }
 

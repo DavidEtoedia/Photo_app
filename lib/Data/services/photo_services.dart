@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/constant/constant.dart';
 import 'package:photo_app/Data/services/model/failure.dart';
 import 'package:photo_app/Data/services/model/photos.dart';
+import 'package:photo_app/presentation/locator.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'model/photo_by_id.dart';
@@ -25,12 +26,14 @@ class PhotoServices {
     _dio.interceptors.add(PrettyDioLogger());
   }
 
-  Future<List<Photos>> getPhoto() async {
-    const url = "photos/?client_id=${Constants.apiKey}";
+  Future<List<Photos>> getPhoto([int pages = 1]) async {
+    final url = "photos?page=$pages&client_id=${Constants.apiKey}";
+
     try {
       final response = await _dio.get(url);
       final res =
           List<Photos>.from(response.data.map((x) => Photos.fromJson(x)));
+
       return res;
     } on DioError catch (e) {
       if (e.response != null && e.response!.data != '') {

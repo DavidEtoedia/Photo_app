@@ -8,11 +8,16 @@ import 'package:photo_app/presentation/ui/widgets/loading_progress.dart';
 import 'package:photo_app/presentation/utils/navigator.dart';
 
 class PhotoList extends HookConsumerWidget {
-  const PhotoList({Key? key}) : super(key: key);
+  PhotoList({Key? key}) : super(key: key);
+
+  final counterStateProvider = StateProvider<int>((ref) {
+    return 1;
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final photoList = ref.watch(getPhotoProvider);
+
     return photoList.when(
         idle: () => const LoadingProgress(),
         loading: () => const LoadingProgress(),
@@ -29,6 +34,7 @@ class PhotoList extends HookConsumerWidget {
                 itemCount: value!.length,
                 itemBuilder: (context, index) {
                   final photo = value[index];
+
                   return Column(
                     children: [
                       Row(
