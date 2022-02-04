@@ -23,7 +23,7 @@ class PhotoServices {
   PhotoServices(
     this._dio,
   ) {
-    _dio.interceptors.add(PrettyDioLogger());
+    // _dio.interceptors.add(PrettyDioLogger());
   }
 
   Future<List<Photos>> getPhoto([int pages = 1]) async {

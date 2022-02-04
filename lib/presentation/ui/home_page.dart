@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photo_app/presentation/helper/space_widget.dart';
 import 'package:photo_app/presentation/ui/screens/new_list.dart';
 import 'package:photo_app/presentation/ui/widgets/photo_list.dart';
 
@@ -10,19 +11,18 @@ class HomePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         appBar: AppBar(),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            const UnsplashTitle(),
-            const SizedBox(
-              height: 20,
-            ),
-            NewList()
-            // PhotoList()
-          ],
+        body: Padding(
+          padding: const EdgeInsets.only(left: 24, right: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Space(40),
+              UnsplashTitle(),
+              Space(30),
+              PhotoFeeds()
+              // PhotoList()
+            ],
+          ),
         ));
   }
 }
@@ -35,7 +35,7 @@ class UnsplashTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15),
+      padding: const EdgeInsets.only(left: 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
