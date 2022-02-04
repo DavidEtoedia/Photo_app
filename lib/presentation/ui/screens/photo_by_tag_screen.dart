@@ -51,9 +51,11 @@ class PhotoTagScreen extends HookConsumerWidget {
                     color: Colors.black),
               ),
             ),
-            const SizedBox(
-              height: 35,
-            ),
+            description == ''
+                ? const SizedBox.shrink()
+                : const SizedBox(
+                    height: 35,
+                  ),
             vm.when(
               error: (Object error, StackTrace? stackTrace) {
                 return Text(error.toString());

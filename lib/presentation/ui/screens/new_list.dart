@@ -6,12 +6,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_app/Data/services/model/photos.dart';
 import 'package:photo_app/presentation/helper/photo_controller.dart';
+import 'package:photo_app/presentation/helper/space_widget.dart';
 import 'package:photo_app/presentation/ui/screens/photo_by_id_screen.dart';
 import 'package:photo_app/presentation/ui/widgets/loading_progress.dart';
 import 'package:photo_app/presentation/utils/navigator.dart';
 
-class NewList extends HookConsumerWidget {
-  const NewList({Key? key}) : super(key: key);
+class PhotoFeeds extends HookConsumerWidget {
+  const PhotoFeeds({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(invoiceControllerProvider);
@@ -22,6 +23,8 @@ class NewList extends HookConsumerWidget {
         // height: 200,
         child: ListView.separated(
           controller: scrollController,
+          physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics()),
           itemCount: controller.photo.length + (controller.isLoading ? 1 : 0),
           itemBuilder: (context, index) {
             if (index < controller.photo.length) {
@@ -53,9 +56,7 @@ class NewList extends HookConsumerWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
+                      const Space(10),
                       Text(
                         toBeginningOfSentenceCase(value.user!.name.toString())!,
                         style: const TextStyle(
@@ -65,9 +66,7 @@ class NewList extends HookConsumerWidget {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const Space(10),
                   InkWell(
                     onTap: () =>
                         context.navigate(SinglePhotoView(photoId: value.id!)),
