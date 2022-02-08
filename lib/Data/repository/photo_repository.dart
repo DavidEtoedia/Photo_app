@@ -5,11 +5,6 @@ import 'package:photo_app/Data/services/model/photo_by_tag.dart';
 import 'package:photo_app/Data/services/photo_services.dart';
 import 'package:photo_app/Data/services/model/photos.dart';
 
-final photoProvider = Provider<PhotoRepository>((ref) {
-  final photoService = ref.watch(photoServiceProvider);
-  return PhotoRepository(photoService);
-});
-
 class PhotoRepository extends IRepository {
   final PhotoServices _photoServices;
 

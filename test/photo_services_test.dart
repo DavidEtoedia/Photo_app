@@ -1,47 +1,50 @@
 // import 'package:dio/dio.dart';
 // import 'package:flutter_test/flutter_test.dart';
+// import 'package:mockito/annotations.dart';
 // import 'package:mockito/mockito.dart';
 // import 'package:photo_app/Data/constant/constant.dart';
-// import 'package:photo_app/Data/services/model/failure.dart';
+// import 'package:photo_app/Data/repository/i_repo.dart';
+// import 'package:photo_app/Data/repository/photo_repository.dart';
 // import 'package:photo_app/Data/services/model/photos.dart';
 // import 'package:photo_app/Data/services/photo_services.dart';
 
+// import 'photo_services_test.mocks.dart';
+
 // class MockDio extends Mock implements Dio {}
 
-// main() {
-//   setUp(() {});
+// @GenerateMocks([MockDio])
+// void main() {
+//   MockMockDio _mockFetch = MockMockDio();
+//   PhotoServices? _photoServices;
+//   Photos? photos;
+//   setUp(() {
+//     _photoServices = PhotoServices(_mockFetch);
+//   });
+
 //   tearDown(() {});
-//   test('my first test', () async {
+//   test('fetch photo Data', () async {
 //     //Arrange
+//     // final fetch = MockMockDio();
 
-//     final _mockDio = MockDio();
-//     // final PhotoServices photoServices = PhotoServices(_mockDio);
-//     // final result = await photoServices.getPhoto();
+//     // final PhotoServices photoServices = PhotoServices(fetch);
+//     int pages = 1;
 
-//     Future<List<Photos>> getPhoto([int pages = 1]) async {
-//       final url = "photos?page=$pages&client_id=${Constants.apiKey}";
+//     final url = "photos?page=$pages&client_id=${Constants.apiKey}";
 
-//       try {
-//         final response = await _mockDio.get(url);
-//         final res =
-//             List<Photos>.from(response.data.map((x) => Photos.fromJson(x)));
+//     when(_mockFetch.get(url)).thenAnswer((_) async => Future.value(Response(
+//         requestOptions: RequestOptions(
+//             data: photos, path: Constants.apiUrl, baseUrl: Constants.apiUrl))));
 
-//         return res;
-//       } on DioError catch (e) {
-//         if (e.response != null && e.response!.data != '') {
-//           Failure result = Failure.fromJson(e.response!.data);
-//           throw result.error!;
-//         } else {
-//           throw e.error;
-//         }
-//       }
-//     }
+//     // final result = PhotoServices(fetch);
+
+//     final res = await _photoServices!.getPhoto();
 
 //     //Act
-//     final resultProvider = PhotoServices(_mockDio);
-//     final resultX = await resultProvider.getPhoto();
+
+//     // final res = result.getPhoto();
 
 //     //Assert
-//     expectLater(resultX[0].id, 1);
+
+//     expect(res.length, 10);
 //   });
 // }
