@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:photo_app/presentation/locator.dart';
+import 'package:photo_app/presentation/ui/screens/login_screen.dart';
+import 'Data/services/auth/config/config.dart';
 import 'presentation/ui/home_page.dart';
 import 'presentation/utils/app_observer.dart';
 import 'presentation/utils/navigator.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await configureApp();
   runApp(ProviderScope(observers: [Logger()], child: const MyApp()));
 }
 
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const LoginScreen(),
     );
   }
 }

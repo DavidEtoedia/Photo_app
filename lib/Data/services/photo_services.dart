@@ -9,21 +9,12 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'model/photo_by_id.dart';
 import 'model/photo_by_tag.dart';
 
-final photoServiceProvider = Provider<PhotoServices>((ref) {
-  return PhotoServices((ref.watch(dioProvider)));
-});
-
-final dioProvider = Provider((ref) => Dio(BaseOptions(
-    receiveTimeout: 100000,
-    connectTimeout: 100000,
-    baseUrl: Constants.apiUrl)));
-
 class PhotoServices {
   final Dio _dio;
   PhotoServices(
     this._dio,
   ) {
-    // _dio.interceptors.add(PrettyDioLogger());
+    _dio.interceptors.add(PrettyDioLogger());
   }
 
   Future<List<Photos>> getPhoto([int pages = 1]) async {
