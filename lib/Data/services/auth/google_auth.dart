@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/model/app_user.dart';
+import 'package:photo_app/Data/repository/providers/locators.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 class GoogleAuth extends ChangeNotifier {
   final Ref ref;
   GoogleAuth(this.ref);
 
-  final client = supabase.Supabase.instance;
+  final clientt = inject.get<supabase.Supabase>();
   var authRedirectUri = 'io.supabase.flutterdemo://login-callback';
 
   Future googleSignIn() async {
     try {
-      final res = await client.client.auth.signInWithProvider(
+      final res = await clientt.client.auth.signInWithProvider(
           supabase.Provider.google,
           options: supabase.AuthOptions(redirectTo: authRedirectUri));
 
@@ -29,7 +30,7 @@ class GoogleAuth extends ChangeNotifier {
 
   Future googleSignOut() async {
     try {
-      final res = await client.client.auth.signOut();
+      final res = await clientt.client.auth.signOut();
 
       if (res.error == null) {
         print('an error occurred');
