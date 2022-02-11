@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/services/auth/auth_state.dart';
 import 'package:photo_app/Data/services/auth/google_auth.dart';
+import 'package:photo_app/presentation/helper/image_provider.dart';
 import 'package:photo_app/presentation/helper/space_widget.dart';
 import 'package:photo_app/presentation/ui/screens/widget/button_widget.dart';
 import 'package:photo_app/presentation/ui/screens/widget/image_widget.dart';
@@ -17,9 +18,7 @@ class _LoginScreenState extends AuthState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BackGroundImage(
-      image: const AssetImage(
-        'assets/images/bg.jpg',
-      ),
+      image: const AssetImage(AppImages.unsplashBg),
       child: Scaffold(
           backgroundColor: Colors.transparent,
           body: HookConsumer(
@@ -34,7 +33,7 @@ class _LoginScreenState extends AuthState<LoginScreen> {
                       70,
                     ),
                     Image.asset(
-                      'assets/images/logo.png',
+                      AppImages.unsplashLogo,
                       color: Colors.white,
                       // height: 100,
                       width: 250,

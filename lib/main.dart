@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photo_app/Data/repository/providers/locators.dart';
 import 'package:photo_app/presentation/helper/app_theme.dart';
 import 'package:photo_app/presentation/ui/screens/login_screen.dart';
 import 'Data/services/auth/config/config.dart';
@@ -9,7 +10,7 @@ import 'presentation/utils/navigator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await configureApp();
+  await initialize();
   runApp(ProviderScope(observers: [Logger()], child: const MyApp()));
 }
 

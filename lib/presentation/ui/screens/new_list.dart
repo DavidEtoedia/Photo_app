@@ -50,8 +50,8 @@ class PhotoFeeds extends HookConsumerWidget {
                             width: 50,
                             child: Image.asset(
                               'assets/images/noimage.jpg',
-                              width: 20,
-                              height: 20,
+                              width: MediaQuery.of(context).size.width,
+                              height: 100,
                             ),
                           ),
                         ),
