@@ -12,14 +12,20 @@ class AppThemeData {
           color: Colors.grey,
           titleTextStyle: TextStyle(
               fontSize: 26, fontFamily: GoogleFonts.openSans().fontFamily)),
-      primaryColor: Colors.blue,
+      primaryColor: Colors.black,
       fontFamily: GoogleFonts.openSans().fontFamily,
       textTheme: const TextTheme(
-          headline1: TextStyle(
-              fontSize: 55, color: Colors.white, fontWeight: FontWeight.w600),
-          bodyText1: TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-              fontWeight: FontWeight.w400,
-              height: 1.5)));
+        headline1: TextStyle(
+            fontSize: 55, color: Colors.white, fontWeight: FontWeight.w600),
+        bodyText1: TextStyle(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+            height: 1.5),
+        bodyText2: TextStyle(
+            color: Colors.black38,
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+            height: 1.5),
+      ));
 }

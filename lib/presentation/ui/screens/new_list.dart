@@ -4,18 +4,26 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:photo_app/Data/model/liked_model.dart';
+import 'package:photo_app/Data/repository/providers/locators.dart';
+import 'package:photo_app/Data/services/auth/supabase_services.dart';
 import 'package:photo_app/Data/services/model/photos.dart';
+import 'package:photo_app/presentation/helper/likes_list.dart';
 import 'package:photo_app/presentation/helper/photo_controller.dart';
 import 'package:photo_app/presentation/helper/space_widget.dart';
 import 'package:photo_app/presentation/ui/screens/photo_by_id_screen.dart';
 import 'package:photo_app/presentation/ui/widgets/loading_progress.dart';
 import 'package:photo_app/presentation/utils/navigator.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PhotoFeeds extends HookConsumerWidget {
   const PhotoFeeds({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(invoiceControllerProvider);
+    final likeState = ref.watch(likeProvider);
+    // final user = inject.get<User>();
     final scrollController = ScrollController();
 
     return Expanded(
@@ -95,9 +103,26 @@ class PhotoFeeds extends HookConsumerWidget {
                             border: Border.all(width: 1, color: Colors.grey),
                             borderRadius: BorderRadius.circular(5),
                           ),
-                          child: Icon(
-                            Icons.favorite_outlined,
-                            color: Colors.grey[600],
+                          child: InkWell(
+                            onTap: () {
+                              if (likeState.photos.contains(value)) {
+                                ref.read(likeProvider.notifier).remove(value);
+                              } else {
+                                ref
+                                    .read(likeProvider.notifier)
+                                    .add(value.urls!.regular.toString(), value);
+
+                                print(likeState.images[0]);
+                              }
+
+                              // print("printed $index");
+                            },
+                            child: Icon(
+                              Icons.favorite_outlined,
+                              color: likeState.photos.contains(value)
+                                  ? Colors.red
+                                  : Colors.grey[600],
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -142,7 +167,7 @@ class PhotoFeeds extends HookConsumerWidget {
                 ],
               );
             } else {
-              Timer(Duration(milliseconds: 30), () {
+              Timer(const Duration(milliseconds: 30), () {
                 scrollController
                     .jumpTo(scrollController.position.maxScrollExtent);
               });
@@ -155,19 +180,6 @@ class PhotoFeeds extends HookConsumerWidget {
           },
         ),
       ),
-    );
-  }
-}
-
-class MovieBox extends StatelessWidget {
-  final Photos? photos;
-
-  const MovieBox({Key? key, this.photos}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [Text(photos!.likes.toString())],
     );
   }
 }

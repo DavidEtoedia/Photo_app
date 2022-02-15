@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photo_app/Data/model/liked_model.dart';
 import 'package:photo_app/Data/repository/photo_repository.dart';
 import 'package:photo_app/Data/repository/providers/service_providers.dart';
 import 'package:photo_app/Data/services/model/photo_exceptions.dart';
