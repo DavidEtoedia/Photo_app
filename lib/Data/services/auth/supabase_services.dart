@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/model/app_user.dart';
+import 'package:photo_app/Data/model/liked_model.dart';
 import 'package:photo_app/Data/repository/providers/locators.dart';
+import 'package:supabase/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
-class GoogleAuth extends ChangeNotifier {
+class ApiService extends ChangeNotifier {
   final Ref ref;
-  GoogleAuth(this.ref);
+  ApiService(this.ref);
 
   final clientt = inject.get<supabase.Supabase>();
   var authRedirectUri = 'io.supabase.flutterdemo://login-callback';
 
   Future googleSignIn() async {
+    // final user = inject.get<User>();
     try {
       final res = await clientt.client.auth.signInWithProvider(
           supabase.Provider.google,
@@ -20,7 +23,8 @@ class GoogleAuth extends ChangeNotifier {
       if (res == false) {
         print('user is not logged in');
       } else {
-        print('false');
+        // await clientt.client.from('images').update(
+        //     {'id': user.id, 'image': 'david', 'created': 'clami'}).execute();
       }
       notifyListeners();
     } catch (e) {
@@ -38,6 +42,26 @@ class GoogleAuth extends ChangeNotifier {
         print('false');
       }
       notifyListeners();
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<PostgrestResponse> postImages(
+    List imageList,
+    DateTime date,
+  ) async {
+    final user = clientt.client.auth.currentUser;
+
+    try {
+      final res = await clientt.client
+          .from('images')
+          .upsert(LikedImages(id: user!.id, image: imageList, created: date)
+              .toJson())
+          .execute();
+
+      notifyListeners();
+      return res;
     } catch (e) {
       throw e.toString();
     }
@@ -66,4 +90,4 @@ class GoogleAuth extends ChangeNotifier {
 
 }
 
-final googleStateProvider = ChangeNotifierProvider(((ref) => GoogleAuth(ref)));
+final supaBaseProvider = ChangeNotifierProvider(((ref) => ApiService(ref)));

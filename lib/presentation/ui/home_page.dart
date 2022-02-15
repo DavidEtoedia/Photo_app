@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/repository/providers/locators.dart';
-import 'package:photo_app/Data/services/auth/google_auth.dart';
+import 'package:photo_app/Data/services/auth/supabase_services.dart';
 import 'package:photo_app/presentation/helper/image_provider.dart';
 import 'package:photo_app/presentation/helper/space_widget.dart';
 import 'package:photo_app/presentation/ui/screens/new_list.dart';
@@ -20,22 +20,25 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.only(left: 24, right: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Space(40),
-          UnsplashTitle(),
-          Space(30),
-          ArtistFacePile(),
-          Space(30),
-          PhotoFeeds()
-          // PhotoList()
-        ],
-      ),
-    ));
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: Scaffold(
+          body: Padding(
+        padding: const EdgeInsets.only(left: 24, right: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Space(40),
+            UnsplashTitle(),
+            Space(30),
+            ArtistFacePile(),
+            Space(30),
+            PhotoFeeds()
+            // PhotoList()
+          ],
+        ),
+      )),
+    );
   }
 }
 
@@ -79,7 +82,22 @@ class UnsplashTitle extends HookConsumerWidget {
                 decoration: BoxDecoration(
                     color: const Color(0XFFeeeeee),
                     borderRadius: BorderRadius.circular(25)),
-                child: TextFormField(),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Search photos',
+                      labelStyle: Theme.of(context).textTheme.bodyText2,
+                      border: InputBorder.none,
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                    ),
+                  ),
+                ),
               ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(300.0),

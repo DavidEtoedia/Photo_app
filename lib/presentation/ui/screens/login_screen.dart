@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/services/auth/auth_state.dart';
-import 'package:photo_app/Data/services/auth/google_auth.dart';
+import 'package:photo_app/Data/services/auth/supabase_services.dart';
 import 'package:photo_app/presentation/helper/image_provider.dart';
 import 'package:photo_app/presentation/helper/space_widget.dart';
 import 'package:photo_app/presentation/ui/screens/widget/button_widget.dart';
@@ -23,7 +23,7 @@ class _LoginScreenState extends AuthState<LoginScreen> {
           backgroundColor: Colors.transparent,
           body: HookConsumer(
             builder: (context, ref, child) {
-              final signIn = ref.watch(googleStateProvider);
+              final signIn = ref.watch(supaBaseProvider);
               return Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: Column(
