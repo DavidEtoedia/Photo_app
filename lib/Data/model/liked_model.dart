@@ -1,24 +1,24 @@
 class LikedImages {
   String id;
-  List image;
+  List url;
   DateTime created;
 
   LikedImages({
     required this.id,
-    required this.image,
+    required this.url,
     required this.created,
   });
 
   factory LikedImages.fromJson(Map<String, dynamic> json) => LikedImages(
         // created: DateTime.parse(json["created"]),
         id: json['id'],
-        image: ['image'].toList(),
+        url: ['url'].toList(),
         created: DateTime.parse(json["created"]),
       );
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'image': image,
+        'url': url,
         'created': created.toIso8601String(),
       };
 }

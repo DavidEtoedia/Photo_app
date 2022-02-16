@@ -55,9 +55,9 @@ class ApiService extends ChangeNotifier {
 
     try {
       final res = await clientt.client
-          .from('images')
-          .upsert(LikedImages(id: user!.id, image: imageList, created: date)
-              .toJson())
+          .from('profiles')
+          .upsert(
+              LikedImages(id: user!.id, url: imageList, created: date).toJson())
           .execute();
 
       notifyListeners();

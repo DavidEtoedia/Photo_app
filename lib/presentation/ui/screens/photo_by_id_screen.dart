@@ -227,14 +227,20 @@ class SinglePhotoView extends HookConsumerWidget {
                           value.location!.name == null
                               ? const Text('Unknown',
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       color: Colors.black54,
                                       fontWeight: FontWeight.w600))
-                              : Text(value.location!.name.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w600))
+                              : Expanded(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Text(value.location!.name.toString(),
+                                        overflow: TextOverflow.fade,
+                                        style: const TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.black54,
+                                            fontWeight: FontWeight.w600)),
+                                  ),
+                                )
                         ],
                       ),
                     ),
@@ -255,12 +261,12 @@ class SinglePhotoView extends HookConsumerWidget {
                           value.exif!.name == null
                               ? const Text('Unknown',
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       color: Colors.black54,
                                       fontWeight: FontWeight.w600))
                               : Text(value.exif!.name.toString(),
                                   style: const TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       color: Colors.black54,
                                       fontWeight: FontWeight.w600))
                         ],
