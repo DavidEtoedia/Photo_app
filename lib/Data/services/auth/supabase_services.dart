@@ -13,6 +13,9 @@ class ApiService extends ChangeNotifier {
   final clientt = inject.get<supabase.Supabase>();
   var authRedirectUri = 'io.supabase.flutterdemo://login-callback';
 
+  LikedImages? _likedImages;
+  LikedImages? get likedData => _likedImages;
+
   Future googleSignIn() async {
     // final user = inject.get<User>();
     try {
@@ -62,6 +65,33 @@ class ApiService extends ChangeNotifier {
 
       notifyListeners();
       return res;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future getImages() async {
+    final user = clientt.client.auth.currentUser;
+
+    try {
+      final res = await clientt.client
+          .from('profiles')
+          .select('url')
+          .eq('id', user!.id)
+          .execute();
+      final list = res.data as List;
+      print('firefromeher');
+
+      final response = res.toJson().entries.toList();
+
+      print(response[0].key);
+
+      notifyListeners();
+      return list.map((e) => LikedImages.fromJson(e)).toList();
+
+      // _likedImages = LikedImages.fromJson(res.data);
+
+      // return res;
     } catch (e) {
       throw e.toString();
     }

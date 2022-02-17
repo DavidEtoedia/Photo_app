@@ -4,20 +4,28 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:photo_app/presentation/helper/Collections%20controller/collection_controller.dart';
 import 'package:photo_app/presentation/helper/likes_list.dart';
 import 'package:photo_app/presentation/helper/photo_controller.dart';
 import 'package:photo_app/presentation/helper/space_widget.dart';
 import 'package:photo_app/presentation/ui/screens/photo_by_id_screen.dart';
+import 'package:photo_app/presentation/ui/screens/widget/bottom_sheet.dart';
 import 'package:photo_app/presentation/ui/widgets/loading_progress.dart';
 import 'package:photo_app/presentation/utils/navigator.dart';
 
 class PhotoFeeds extends HookConsumerWidget {
-  const PhotoFeeds({Key? key}) : super(key: key);
+  PhotoFeeds({Key? key}) : super(key: key);
+
+  final toggleProvider = StateProvider<bool>((ref) {
+    return false;
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(invoiceControllerProvider);
+    final toggle = ref.watch(toggleProvider.state);
     final likeState = ref.watch(likeProvider);
+    final collection = ref.watch(collectionProvider);
     // final user = inject.get<User>();
     final scrollController = ScrollController();
 
@@ -130,14 +138,11 @@ class PhotoFeeds extends HookConsumerWidget {
                                 shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.vertical(
                                         top: Radius.circular(20))),
-                                builder: (context) {
-                                  return Container(
-                                    height: 600,
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [],
-                                    ),
-                                  );
+                                builder: (
+                                  context,
+                                ) {
+                                  return CollectionDisplay(
+                                      image: value.urls!.regular.toString());
                                 });
                           },
                           child: Container(
