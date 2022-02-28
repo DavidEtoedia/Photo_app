@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:photo_app/Data/model/app_user.dart';
+import 'package:photo_app/Data/model/liked_image_res.dart';
 import 'package:photo_app/Data/model/liked_model.dart';
 import 'package:photo_app/Data/repository/providers/locators.dart';
 import 'package:supabase/supabase.dart';
@@ -14,7 +14,11 @@ class ApiService extends ChangeNotifier {
   var authRedirectUri = 'io.supabase.flutterdemo://login-callback';
 
   LikedImages? _likedImages;
+  List<Likes>? _likes;
+  List<dynamic>? _urls;
   LikedImages? get likedData => _likedImages;
+  List<dynamic>? get url => _urls;
+  List<Likes>? get like => _likes;
 
   Future googleSignIn() async {
     // final user = inject.get<User>();
@@ -70,28 +74,19 @@ class ApiService extends ChangeNotifier {
     }
   }
 
-  Future getImages() async {
+  Future<PostgrestResponse> getImages() async {
     final user = clientt.client.auth.currentUser;
 
     try {
       final res = await clientt.client
           .from('profiles')
-          .select('url')
+          .select('*')
           .eq('id', user!.id)
           .execute();
-      final list = res.data as List;
-      print('firefromeher');
+      _likes = List<Likes>.from(res.data.map((x) => Likes.fromJson(x)));
+      print(_likes![0].url!.length);
 
-      final response = res.toJson().entries.toList();
-
-      print(response[0].key);
-
-      notifyListeners();
-      return list.map((e) => LikedImages.fromJson(e)).toList();
-
-      // _likedImages = LikedImages.fromJson(res.data);
-
-      // return res;
+      return res;
     } catch (e) {
       throw e.toString();
     }

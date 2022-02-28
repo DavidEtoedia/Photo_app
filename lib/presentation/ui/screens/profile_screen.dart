@@ -16,12 +16,7 @@ class ProfileScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pro = inject.get<User>();
-    final user = inject.get<LikedImages>();
-    // _likedImages = ref.read(supaBaseProvider).likedData;
-
-    useEffect((() {
-      ref.read(supaBaseProvider).getImages();
-    }));
+    final likedImages = ref.watch(supaBaseProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -34,6 +29,7 @@ class ProfileScreen extends HookConsumerWidget {
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(300.0),
@@ -54,7 +50,33 @@ class ProfileScreen extends HookConsumerWidget {
                 ),
               ),
             ),
-            Text(user.created.toString())
+            SizedBox(
+              height: 400,
+              child: ListView.builder(
+                  itemCount: likedImages.like![0].url!.length,
+                  itemBuilder: (context, index) {
+                    final img = likedImages.like![0].url![index];
+                    return SizedBox(
+                      height: 200,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        height: 100,
+                        width: 100,
+                        imageUrl: img,
+                        placeholder: (context, url) => const LoadingProgress(),
+                        errorWidget: (context, url, error) => SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: Image.asset(
+                            'assets/images/noimage.jpg',
+                            width: MediaQuery.of(context).size.width,
+                            height: 100,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+            )
           ],
         ),
       ),
