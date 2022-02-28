@@ -4,25 +4,28 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:photo_app/Data/model/liked_model.dart';
-import 'package:photo_app/Data/repository/providers/locators.dart';
-import 'package:photo_app/Data/services/auth/supabase_services.dart';
-import 'package:photo_app/Data/services/model/photos.dart';
+import 'package:photo_app/presentation/helper/Collections%20controller/collection_controller.dart';
 import 'package:photo_app/presentation/helper/likes_list.dart';
 import 'package:photo_app/presentation/helper/photo_controller.dart';
 import 'package:photo_app/presentation/helper/space_widget.dart';
 import 'package:photo_app/presentation/ui/screens/photo_by_id_screen.dart';
+import 'package:photo_app/presentation/ui/screens/widget/bottom_sheet.dart';
 import 'package:photo_app/presentation/ui/widgets/loading_progress.dart';
 import 'package:photo_app/presentation/utils/navigator.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PhotoFeeds extends HookConsumerWidget {
-  const PhotoFeeds({Key? key}) : super(key: key);
+  PhotoFeeds({Key? key}) : super(key: key);
+
+  final toggleProvider = StateProvider<bool>((ref) {
+    return false;
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(invoiceControllerProvider);
+    final toggle = ref.watch(toggleProvider.state);
     final likeState = ref.watch(likeProvider);
+    final collection = ref.watch(collectionProvider);
     // final user = inject.get<User>();
     final scrollController = ScrollController();
 
@@ -106,7 +109,8 @@ class PhotoFeeds extends HookConsumerWidget {
                           child: InkWell(
                             onTap: () {
                               if (likeState.photos.contains(value)) {
-                                ref.read(likeProvider.notifier).remove(value);
+                                ref.read(likeProvider.notifier).remove(
+                                    value.urls!.regular.toString(), value);
                               } else {
                                 ref
                                     .read(likeProvider.notifier)
@@ -114,8 +118,6 @@ class PhotoFeeds extends HookConsumerWidget {
 
                                 print(likeState.images[0]);
                               }
-
-                              // print("printed $index");
                             },
                             child: Icon(
                               Icons.favorite_outlined,
@@ -128,18 +130,34 @@ class PhotoFeeds extends HookConsumerWidget {
                         const SizedBox(
                           width: 7,
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                              top: 15, bottom: 15, left: 10),
-                          height: 30,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Icon(
-                            Icons.add_outlined,
-                            color: Colors.grey[600],
+                        InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(20))),
+                                builder: (
+                                  context,
+                                ) {
+                                  return CollectionDisplay(
+                                      image: value.urls!.regular.toString());
+                                });
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                                top: 15, bottom: 15, left: 10),
+                            height: 30,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 1, color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Icon(
+                              Icons.add_outlined,
+                              color: Colors.grey[600],
+                            ),
                           ),
                         ),
                         const Spacer(),

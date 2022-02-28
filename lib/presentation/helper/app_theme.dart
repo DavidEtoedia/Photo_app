@@ -17,6 +17,10 @@ class AppThemeData {
       textTheme: const TextTheme(
         headline1: TextStyle(
             fontSize: 55, color: Colors.white, fontWeight: FontWeight.w600),
+        headline2: TextStyle(
+            fontSize: 20,
+            color: Color.fromARGB(255, 4, 4, 4),
+            fontWeight: FontWeight.bold),
         bodyText1: TextStyle(
             color: Colors.white,
             fontSize: 17,

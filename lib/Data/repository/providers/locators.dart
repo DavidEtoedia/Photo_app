@@ -1,5 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:photo_app/Data/model/liked_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../constant/constant.dart';
@@ -12,6 +13,7 @@ final userr = Supabase.instance.client.auth.user();
 Future<void> initialize() async {
   await configureApp();
   _initUser();
+  _likedCollection();
 }
 
 /// get provider details and metaData
@@ -28,6 +30,11 @@ void _initUser() {
       updatedAt: userr!.updatedAt));
 
   inject.registerLazySingleton<Supabase>(() => Supabase.instance);
+}
+
+void _likedCollection() {
+  // final likeCol = supaBase.client.from('profiles').execute();
+  inject.registerLazySingleton<LikedImages>(() => LikedImages());
 }
 
 //Supabase initialize setup

@@ -14,14 +14,13 @@ class LikedPhotos extends ChangeNotifier {
 
   final List<Photos> _photos = [];
   final List<String> _images = [];
-  final Photos photo = Photos();
 
   final clientt = supa.Supabase.instance;
   List<String> get images => _images;
   List<Photos> get photos => _photos;
 
-  void remove(Photos photos) {
-    final index = _photos.indexOf(photos);
+  void remove(String photos, Photos photo) {
+    final index = _photos.indexOf(photo);
     _photos.removeAt(index);
     notifyListeners();
   }
