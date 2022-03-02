@@ -16,5 +16,13 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 
+| Name  | Usage |
+| ------------- | ------------- |
+| DIO  | Content Cell  |
+| Go_Router  | Content Cell  |
+| Riverpod  | Content Cell  |
+| Equatable  | Content Cell  |
+
+
 ![photo](https://user-images.githubusercontent.com/41623462/154132175-7771409d-3c89-4097-bf7a-10b04509f383.png)
 ![photo3](https://user-images.githubusercontent.com/41623462/154132288-573528ac-db39-41fd-9e6d-cb2bdba5dc67.png)
