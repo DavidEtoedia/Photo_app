@@ -21,7 +21,7 @@ samples, guidance on mobile development, and a full API reference.
 | DIO  | Content Cell  |
 | Go_Router  | Content Cell  |
 | Riverpod  | Content Cell  |
-| Equatable  | Content Cell  |
+| [Link to Google](https://www.google.com) | Content Cell  |
 
 
 ![photo](https://user-images.githubusercontent.com/41623462/154132175-7771409d-3c89-4097-bf7a-10b04509f383.png)
