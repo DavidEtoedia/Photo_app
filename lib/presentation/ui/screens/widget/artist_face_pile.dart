@@ -18,26 +18,6 @@ class ArtistFacePile extends HookConsumerWidget {
         return Text(error.toString());
       },
       success: (value) {
-        // return FacePile(
-        //   dimension: 40.6,
-        //   space: 50,
-        //   images: [
-        //     NetworkImage(value![0].user!.profileImage!.medium.toString()),
-        //     NetworkImage(value[1].user!.profileImage!.medium.toString()),
-        //     NetworkImage(value[2].user!.profileImage!.medium.toString()),
-        //     NetworkImage(value[3].user!.profileImage!.medium.toString()),
-        //     NetworkImage(value[4].user!.profileImage!.medium.toString()),
-        //     NetworkImage(value[5].user!.profileImage!.medium.toString()),
-        //     NetworkImage(value[6].user!.profileImage!.medium.toString()),
-        //     NetworkImage(value[7].user!.profileImage!.medium.toString()),
-        //     NetworkImage(value[8].user!.profileImage!.medium.toString()),
-        //     NetworkImage(value[9].user!.profileImage!.medium.toString()),
-        //     // NetworkImage("https://i.pravatar.cc/300?img=2"),
-        //     // NetworkImage("https://i.pravatar.cc/300?img=3"),
-        //     // NetworkImage("https://i.pravatar.cc/300?img=4"),
-        //   ],
-        //   child: Text("3+"),
-        // );
         return ShaderMask(
           shaderCallback: (Rect bounds) {
             return const LinearGradient(

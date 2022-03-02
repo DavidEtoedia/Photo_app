@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/repository/providers/locators.dart';
 import 'package:photo_app/Data/services/auth/supabase_services.dart';
@@ -52,10 +53,6 @@ class UnsplashTitle extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final supaBase = Supabase.instance;
-    // final user = supaBase.client.auth.user();
-    // final signOut = ref.watch(googleStateProvider);
-
     final pro = inject.get<sbase.User>();
 
     return Padding(
@@ -63,12 +60,6 @@ class UnsplashTitle extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Button(
-          //   title: "Sign Out",
-          //   onClick: () {
-          //     signOut.googleSignOut();
-          //   },
-          // ),
           const Space(20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -103,7 +94,11 @@ class UnsplashTitle extends HookConsumerWidget {
                 ),
               ),
               InkWell(
-                onTap: () => context.navigate(ProfileScreen()),
+                onTap: () {
+                  context.goNamed(
+                    'profile',
+                  );
+                },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(300.0),
                   child: CachedNetworkImage(
@@ -128,13 +123,6 @@ class UnsplashTitle extends HookConsumerWidget {
           const SizedBox(
             height: 10,
           ),
-          // const Text(
-          //     'Explore the world through collections\nof beautiful HD pictures',
-          //     style: TextStyle(
-          //         height: 1.5,
-          //         fontSize: 16,
-          //         color: Colors.black54,
-          //         fontWeight: FontWeight.w400)),
         ],
       ),
     );
