@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/repository/providers/locators.dart';
 import 'package:photo_app/presentation/helper/app_theme.dart';
+import 'package:photo_app/presentation/ui/route/app_route.dart';
 import 'package:photo_app/presentation/ui/screens/login_screen.dart';
 import 'Data/services/auth/config/config.dart';
 import 'presentation/ui/home_page.dart';
@@ -21,12 +22,15 @@ class MyApp extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final appTheme = ref.watch(appThemeProvider);
-    return MaterialApp(
+    final appRouter = ref.watch(appRouterProvider);
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      navigatorKey: navigator.key,
+      // navigatorKey: navigator.key,
       title: 'Flutter Demo',
       theme: appTheme.appTheme,
-      home: const LoginScreen(),
+      // home: const LoginScreen(),
+      routeInformationParser: appRouter.route.routeInformationParser,
+      routerDelegate: appRouter.route.routerDelegate,
     );
   }
 }

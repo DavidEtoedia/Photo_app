@@ -4,7 +4,6 @@ import 'package:photo_app/Data/services/auth/auth_state.dart';
 import 'package:photo_app/Data/services/auth/supabase_services.dart';
 import 'package:photo_app/presentation/helper/image_provider.dart';
 import 'package:photo_app/presentation/helper/space_widget.dart';
-import 'package:photo_app/presentation/ui/screens/widget/button_widget.dart';
 import 'package:photo_app/presentation/ui/screens/widget/image_widget.dart';
 
 class LoginScreen extends StatefulWidget {

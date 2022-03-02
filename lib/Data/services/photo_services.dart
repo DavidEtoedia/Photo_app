@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/constant/constant.dart';
 import 'package:photo_app/Data/services/model/failure.dart';
 import 'package:photo_app/Data/services/model/photos.dart';
-import 'package:photo_app/presentation/locator.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'model/photo_by_id.dart';

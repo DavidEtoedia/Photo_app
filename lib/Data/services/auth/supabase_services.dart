@@ -43,12 +43,13 @@ class ApiService extends ChangeNotifier {
     try {
       final res = await clientt.client.auth.signOut();
 
-      if (res.error == null) {
-        print('an error occurred');
-      } else {
-        print('false');
-      }
+      // if (res.error == null) {
+      //   // print('an error occurred');
+      // } else {
+      //   print('false');
+      // }
       notifyListeners();
+      return res;
     } catch (e) {
       throw e.toString();
     }

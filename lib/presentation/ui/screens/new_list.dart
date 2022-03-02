@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_app/presentation/helper/Collections%20controller/collection_controller.dart';
@@ -79,8 +80,10 @@ class PhotoFeeds extends HookConsumerWidget {
                   ),
                   const Space(10),
                   InkWell(
-                    onTap: () =>
-                        context.navigate(SinglePhotoView(photoId: value.id!)),
+                    onTap: () {
+                      context.goNamed('details', params: {'id': value.id!});
+                    },
+                    // context.navigate(SinglePhotoView(photoId: value.id!)),
                     child: SizedBox(
                       child: CachedNetworkImage(
                           errorWidget: (context, url, error) => SizedBox(
