@@ -8,6 +8,7 @@ Beautiful, free images and photos. Better than any royalty free or stock photos.
 | ------------- | ------------- |
 | [Riverpod](https://riverpod.dev/)  | Statemanagement  |
 |  [Dio](https://riverpod.dev/)  | Network call  |
+|  [supabase](https://pub.dev/packages/supabase)  | database  |
 |  [Equatable](https://pub.dev/packages/equatable) | Equality Comparisons |
 | [Go_router](https://gorouter.dev/getting-started) | Navigation  |
 
