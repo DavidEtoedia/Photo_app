@@ -6,11 +6,13 @@ import 'package:photo_app/Data/repository/providers/service_providers.dart';
 import 'package:photo_app/Data/services/model/photo_exceptions.dart';
 import 'package:photo_app/Data/services/model/photos.dart';
 
+import '../../Data/services/model/freezed model/photo_class/photo_class.dart';
+
 class InvoiceState extends Equatable {
   final String? errorMessage;
-  final List<Photos> photo;
+  final List<Photo> photo;
   final List<String> list;
-  final Photos? images;
+  final Photo? images;
   final int pages;
   final String? url;
   final bool isLoading;
@@ -42,8 +44,8 @@ class InvoiceState extends Equatable {
       final int? pages,
       final String? url,
       final List<String>? list,
-      final Photos? images,
-      final List<Photos>? photo}) {
+      final Photo? images,
+      final List<Photo>? photo}) {
     return InvoiceState(
       photo: photo ?? this.photo,
       url: url ?? this.url,
@@ -80,10 +82,9 @@ class InvoiceController extends StateNotifier<InvoiceState> {
 
   void addToItems(String list) {
     state = state.copyWith(list: [...state.list, list]);
-    print(state.list);
   }
 
-  void addPhoto(Photos photo) {
+  void addPhoto(Photo photo) {
     state = state.copyWith(images: photo);
   }
 

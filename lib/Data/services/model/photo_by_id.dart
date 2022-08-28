@@ -65,9 +65,8 @@ class PhotosById {
         height: json["height"],
         color: json["color"],
         blurHash: json["blur_hash"],
-        description: json["description"] == null ? '' : json["description"],
-        altDescription:
-            json["alt_description"] == null ? '' : json["alt_description"],
+        description: json["description"] ?? '',
+        altDescription: json["alt_description"] ?? '',
         urls: Urls.fromJson(json["urls"]),
         links: PhotosByIdLinks.fromJson(json["links"]),
         categories: List<dynamic>.from(json["categories"].map((x) => x)),
@@ -76,9 +75,8 @@ class PhotosById {
         currentUserCollections:
             List<dynamic>.from(json["current_user_collections"].map((x) => x)),
         user: User.fromJson(json["user"]),
-        exif: Exif.fromJson(json["exif"] == null ? 'unknown' : json["exif"]),
-        location: Location.fromJson(
-            json["location"] == null ? 'unknown' : json["location"]),
+        exif: Exif.fromJson(json["exif"] ?? 'unknown'),
+        location: Location.fromJson(json["location"] ?? 'unknown'),
         meta: Meta.fromJson(json["meta"]),
         tags: List<PhotosByIdTag>.from(
             json["tags"].map((x) => PhotosByIdTag.fromJson(x))),
@@ -96,8 +94,8 @@ class PhotosById {
         "height": height,
         "color": color,
         "blur_hash": blurHash,
-        "description": description == null ? '' : description,
-        "alt_description": altDescription == null ? "" : altDescription,
+        "description": description ?? '',
+        "alt_description": altDescription ?? "",
         "urls": urls!.toJson(),
         "links": links!.toJson(),
         "categories": List<dynamic>.from(categories!.map((x) => x)),
@@ -106,8 +104,8 @@ class PhotosById {
         "current_user_collections":
             List<dynamic>.from(currentUserCollections!.map((x) => x)),
         "user": user!.toJson(),
-        "exif": exif!.toJson() == null ? 'unknown' : exif!.toJson(),
-        "location": location!.toJson() == null ? 'unknown' : location!.toJson(),
+        if (exif != null) "exif": exif!.toJson(),
+        if (location != null) "location": location!.toJson(),
         "meta": meta!.toJson(),
         "tags": List<dynamic>.from(tags!.map((x) => x.toJson())),
         "tags_preview": List<dynamic>.from(tagsPreview!.map((x) => x.toJson())),
@@ -375,7 +373,7 @@ class ResultCoverPhoto {
         id: json["id"],
         width: json["width"],
         height: json["height"],
-        description: json["description"] == null ? null : json["description"],
+        description: json["description"] ?? '',
         altDescription: json["alt_description"],
         urls: Urls.fromJson(json["urls"]),
         links: PhotosByIdLinks.fromJson(json["links"]),
@@ -391,7 +389,7 @@ class ResultCoverPhoto {
         "id": id,
         "width": width,
         "height": height,
-        "description": description == null ? null : description,
+        if (description != null) "description": description,
         "alt_description": altDescription,
         "urls": urls!.toJson(),
         "links": links!.toJson(),
@@ -463,8 +461,8 @@ class User {
         id: json["id"],
         name: json["name"],
         firstName: json["first_name"],
-        lastName: json["last_name"] == null ? null : json["last_name"],
-        location: json["location"] == null ? null : json["location"],
+        lastName: json["last_name"] ?? '',
+        location: json["location"] ?? '',
         profileImage: ProfileImage.fromJson(json["profile_image"]),
         totalCollections: json["total_collections"],
         totalLikes: json["total_likes"],
@@ -475,8 +473,8 @@ class User {
         "id": id,
         "name": name,
         "first_name": firstName,
-        "last_name": lastName == null ? null : lastName,
-        "location": location == null ? null : location,
+        if (lastName != null) "last_name": lastName,
+        if (location != null) "location": location,
         "profile_image": profileImage!.toJson(),
         "total_collections": totalCollections,
         "total_likes": totalLikes,
@@ -810,7 +808,7 @@ class FluffySource {
         // ancestry: Ancestry.fromJson(json["ancestry"]),
         // title: json["title"],
         // subtitle: json["subtitle"],
-        description: json["description"] == null ? '' : json["description"],
+        description: json["description"] ?? '',
         // metaTitle: json["meta_title"],
         // metaDescription: json["meta_description"],
         // coverPhoto: FluffyCoverPhoto.fromJson(json["cover_photo"]),
@@ -862,9 +860,8 @@ class FluffyCoverPhoto {
         id: json["id"],
         width: json["width"],
         height: json["height"],
-        description: json["description"] == null ? null : json["description"],
-        altDescription:
-            json["alt_description"] == null ? null : json["alt_description"],
+        description: json["description"] ?? '',
+        altDescription: json["alt_description"] ?? '',
         urls: Urls.fromJson(json["urls"]),
         links: PhotosByIdLinks.fromJson(json["links"]),
         categories: List<dynamic>.from(json["categories"].map((x) => x)),
@@ -879,8 +876,8 @@ class FluffyCoverPhoto {
         "id": id,
         "width": width,
         "height": height,
-        "description": description == null ? null : description,
-        "alt_description": altDescription == null ? null : altDescription,
+        if (description != null) "description": description,
+        if (altDescription != null) "alt_description": altDescription,
         "urls": urls!.toJson(),
         "links": links!.toJson(),
         "categories": List<dynamic>.from(categories!.map((x) => x)),
@@ -920,7 +917,7 @@ class EnumValues<T> {
 
   Map<T, String> get reverse {
     if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
+      reverseMap = map.map((k, v) => MapEntry(v, k));
     }
     return reverseMap;
   }

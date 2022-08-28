@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/presentation/helper/Collections%20controller/collection_controller.dart';
 import 'package:photo_app/presentation/helper/photo_controller.dart';
 import 'package:photo_app/presentation/helper/space_widget.dart';
-import 'package:photo_app/presentation/utils/navigator.dart';
 
 class CollectionDisplay extends HookConsumerWidget {
   final String image;
@@ -17,7 +15,7 @@ class CollectionDisplay extends HookConsumerWidget {
     final collection = ref.watch(collectionProvider);
     final controller = ref.watch(invoiceControllerProvider);
 
-    return Container(
+    return SizedBox(
       height: 600,
       child: Padding(
         padding: const EdgeInsets.only(right: 23, left: 23, top: 40),
@@ -70,15 +68,14 @@ class CollectionDisplay extends HookConsumerWidget {
                                     .add(image);
                               }
                             },
-                            child: Container(
-                                child: DottedBorder(
-                              color: Color.fromARGB(255, 148, 148,
+                            child: DottedBorder(
+                              color: const Color.fromARGB(255, 148, 148,
                                   148), //color of dotted/dash line
                               strokeWidth: 1.5, //thickness of dash/dots
                               dashPattern: const [6, 6],
                               //dash patterns, 10 is dash width, 6 is space width
                               child: collection.images.isEmpty
-                                  ? Container(
+                                  ? SizedBox(
                                       height: 90, //height of inner container
                                       width: double.infinity,
                                       child: Container(
@@ -95,7 +92,7 @@ class CollectionDisplay extends HookConsumerWidget {
                                                   .bodyText2),
                                         ), //background color of inner container
                                       ))
-                                  : Container(
+                                  : SizedBox(
                                       height: 90, //height of inner container
                                       width: double.infinity,
                                       child: CachedNetworkImage(
@@ -114,7 +111,7 @@ class CollectionDisplay extends HookConsumerWidget {
                                         ),
                                       ),
                                     ),
-                            )),
+                            ),
                           );
                         },
                         separatorBuilder: (context, index) {

@@ -5,11 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart' show NumberFormat, toBeginningOfSentenceCase;
 import 'package:photo_app/presentation/helper/space_widget.dart';
-import 'package:photo_app/presentation/ui/screens/photo_by_tag_screen.dart';
 
 import 'package:photo_app/presentation/ui/vm/photos_by_id_vm.dart';
 import 'package:photo_app/presentation/ui/widgets/loading_progress.dart';
-import 'package:photo_app/presentation/utils/navigator.dart';
 
 class SinglePhotoView extends HookConsumerWidget {
   final String photoId;

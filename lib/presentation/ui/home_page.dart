@@ -4,14 +4,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/repository/providers/locators.dart';
-import 'package:photo_app/Data/services/auth/supabase_services.dart';
 import 'package:photo_app/presentation/helper/image_provider.dart';
 import 'package:photo_app/presentation/helper/space_widget.dart';
 import 'package:photo_app/presentation/ui/screens/new_list.dart';
-import 'package:photo_app/presentation/ui/screens/profile_screen.dart';
 import 'package:photo_app/presentation/ui/screens/widget/artist_face_pile.dart';
 import 'package:photo_app/presentation/ui/widgets/loading_progress.dart';
-import 'package:photo_app/presentation/utils/navigator.dart';
 import 'package:supabase/supabase.dart' as sbase;
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
@@ -21,7 +18,7 @@ class HomePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     useEffect((() {
-      ref.read(supaBaseProvider.notifier).getImages();
+      // ref.read(supaBaseProvider.notifier).getImages();
 
       return null;
     }));
@@ -34,7 +31,7 @@ class HomePage extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Space(40),
-            const UnsplashTitle(),
+            // const UnsplashTitle(),
             const Space(30),
             const ArtistFacePile(),
             const Space(30),

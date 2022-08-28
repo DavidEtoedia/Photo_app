@@ -2,13 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
-import 'package:photo_app/presentation/ui/screens/photo_by_id_screen.dart';
 import 'package:photo_app/presentation/ui/vm/photos_vm.dart';
 import 'package:photo_app/presentation/ui/widgets/loading_progress.dart';
-import 'package:photo_app/presentation/utils/navigator.dart';
 
-class PhotoList extends HookConsumerWidget {
-  PhotoList({Key? key}) : super(key: key);
+class PhotoLis extends HookConsumerWidget {
+  PhotoLis({Key? key}) : super(key: key);
 
   final counterStateProvider = StateProvider<int>((ref) {
     return 1;
@@ -77,8 +75,8 @@ class PhotoList extends HookConsumerWidget {
                         height: 10,
                       ),
                       InkWell(
-                        onTap: () => context
-                            .navigate(SinglePhotoView(photoId: photo.id!)),
+                        // onTap: () => context
+                        //     .navigate(SinglePhotoView(photoId: photo.id!)),
                         child: SizedBox(
                           child: CachedNetworkImage(
                               errorWidget: (context, url, error) => SizedBox(
