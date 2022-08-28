@@ -28,7 +28,6 @@ class ApiService extends ChangeNotifier {
           options: supabase.AuthOptions(redirectTo: authRedirectUri));
 
       if (res == false) {
-        print('user is not logged in');
       } else {
         // await clientt.client.from('images').update(
         //     {'id': user.id, 'image': 'david', 'created': 'clami'}).execute();
@@ -75,45 +74,23 @@ class ApiService extends ChangeNotifier {
     }
   }
 
-  Future<PostgrestResponse> getImages() async {
-    final user = clientt.client.auth.currentUser;
+  // Future<PostgrestResponse> getImages() async {
+  //   final user = clientt.client.auth.currentUser;
 
-    try {
-      final res = await clientt.client
-          .from('profiles')
-          .select('*')
-          .eq('id', user!.id)
-          .execute();
-      _likes = List<Likes>.from(res.data.map((x) => Likes.fromJson(x)));
-      print(_likes![0].url!.length);
+  //   try {
+  //     final res = await clientt.client
+  //         .from('profiles')
+  //         .select('*')
+  //         .eq('id', user!.id)
+  //         .execute();
+  //     _likes = List<Likes>.from(res.data.map((x) => Likes.fromJson(x)));
+  //     print(_likes![0].url!.length);
 
-      return res;
-    } catch (e) {
-      throw e.toString();
-    }
-  }
-
-//  Future<AppUser> getProfile(String id) async {
-//     try {
-//       final res = await a.Supabase.instance.client
-//           .from('profiles')
-//           .select('id,username,date')
-//           .eq('id', id)
-//           .single()
-//           .execute();
-//       final result = AppUser.fromJson(res.data);
-//       print(result.id);
-//       return result;
-//     } on a.GotrueError catch (e) {
-//       if (e.message.isEmpty || e.message.isNotEmpty) {
-//         ErrorMsg result = ErrorMsg(e.message);
-//         throw result;
-//       } else {
-//         throw e.toString();
-//       }
-//     }
-//   }
-
+  //     return res;
+  //   } catch (e) {
+  //     throw e.toString();
+  //   }
+  // }
 }
 
 final supaBaseProvider = ChangeNotifierProvider(((ref) => ApiService(ref)));

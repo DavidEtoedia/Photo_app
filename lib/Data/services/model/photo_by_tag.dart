@@ -48,20 +48,20 @@ class Result {
   // List<Tag>? tags;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-        id: json["id"] == null ? '' : json["id"],
+        id: json["id"] ?? '',
 
-        urls: Urls.fromJson(json["urls"] == null ? '' : json["urls"]),
+        urls: Urls.fromJson(json["urls"] ?? ''),
 
-        user: User.fromJson(json["user"] == null ? '' : json["user"]),
+        user: User.fromJson(json["user"] ?? ''),
         // tags: List<Tag>.from(json["tags"].map((x) => Tag.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
+        if (id != null) "id": id,
 
-        "urls": urls!.toJson() == null ? '' : urls!.toJson(),
+        if (urls != null) "urls": urls!.toJson(),
 
-        "user": user.toJson() == null ? '' : user.toJson(),
+        if (urls != null) "user": user.toJson(),
         // "tags": List<dynamic>.from(tags!.map((x) => x.toJson())),
       };
 }
@@ -82,20 +82,18 @@ class User {
   ProfileImage profileImage;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"] == null ? '' : json["id"],
-        name: json["name"] == null ? '' : json["name"],
-        firstName: json["first_name"] == null ? '' : json["first_name"],
-        lastName: json["last_name"] == null ? '' : json["last_name"],
-        profileImage: ProfileImage.fromJson(
-            json["profile_image"] == null ? '' : json["profile_image"]),
+        id: json["id"] ?? '',
+        name: json["name"] ?? '',
+        firstName: json["first_name"] ?? '',
+        lastName: json["last_name"] ?? '',
+        profileImage: ProfileImage.fromJson(json["profile_image"] ?? ''),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? '' : id,
-        "name": name == null ? '' : name,
-        "first_name": firstName == null ? '' : firstName,
-        "profile_image":
-            profileImage.toJson() == null ? '' : profileImage.toJson(),
+        "id": id,
+        if (name != null) "name": name,
+        "first_name": firstName,
+        "profile_image": profileImage.toJson(),
       };
 }
 
@@ -111,15 +109,15 @@ class ProfileImage {
   String? large;
 
   factory ProfileImage.fromJson(Map<String, dynamic> json) => ProfileImage(
-        small: json["small"] == null ? '' : json["small"],
-        medium: json["medium"] == null ? '' : json["medium"],
-        large: json["large"] == null ? '' : json["large"],
+        small: json["small"] ?? '',
+        medium: json["medium"] ?? '',
+        large: json["large"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
-        "small": small == null ? '' : small,
-        "medium": medium == null ? '' : medium,
-        "large": large == null ? '' : large,
+        if (small != null) "small": small,
+        if (medium != null) "medium": medium,
+        if (large != null) "large": large,
       };
 }
 

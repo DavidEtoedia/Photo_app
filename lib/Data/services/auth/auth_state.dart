@@ -10,13 +10,12 @@ class AuthState<T extends StatefulWidget> extends SupabaseAuthState<T> {
 
   @override
   void onAuthenticated(Session session) {
-    print(session.user!.userMetadata.keys);
     context.goNamed('home');
   }
 
   @override
   void onErrorAuthenticating(String message) {
-    print('***** onErrorAuthenticating: $message');
+    debugPrint('***** onErrorAuthenticating: $message');
   }
 
   @override

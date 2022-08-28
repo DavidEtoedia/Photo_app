@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:photo_app/presentation/helper/face_pile_helper.dart';
 import 'package:photo_app/presentation/ui/vm/photos_vm.dart';
 
 import '../../widgets/loading_progress.dart';
@@ -51,7 +50,7 @@ class ArtistFacePile extends HookConsumerWidget {
                   borderRadius: BorderRadius.circular(300.0),
                   child: CachedNetworkImage(
                     fit: BoxFit.contain,
-                    imageUrl: facePile.user!.profileImage!.small.toString(),
+                    imageUrl: facePile.user!.profileImage!.medium.toString(),
                     placeholder: (context, url) => const LoadingProgress(),
                     errorWidget: (context, url, error) => SizedBox(
                       height: 50,

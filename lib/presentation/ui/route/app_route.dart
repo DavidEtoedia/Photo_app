@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/presentation/ui/home_page.dart';
 import 'package:photo_app/presentation/ui/route/error_page.dart';
-import 'package:photo_app/presentation/ui/screens/login_screen.dart';
 import 'package:photo_app/presentation/ui/screens/photo_by_id_screen.dart';
 import 'package:photo_app/presentation/ui/screens/photo_by_tag_screen.dart';
 import 'package:photo_app/presentation/ui/screens/profile_screen.dart';
@@ -15,15 +14,15 @@ final appRouterProvider = Provider((ref) {
 class AppRoute {
   final route = GoRouter(
     routes: [
-      GoRoute(
-          name: 'login',
-          path: '/',
-          pageBuilder: (context, state) {
-            return MaterialPage(key: state.pageKey, child: const LoginScreen());
-          }),
+      // GoRoute(
+      //     name: 'login',
+      //     path: '/',
+      //     pageBuilder: (context, state) {
+      //       return MaterialPage(key: state.pageKey, child: const LoginScreen());
+      //     }),
       GoRoute(
           name: 'home',
-          path: '/home',
+          path: '/',
           pageBuilder: (context, state) {
             return MaterialPage(key: state.pageKey, child: const HomePage());
           },

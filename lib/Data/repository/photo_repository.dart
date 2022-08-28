@@ -1,9 +1,10 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photo_app/Data/repository/i_repo.dart';
+
 import 'package:photo_app/Data/services/model/photo_by_id.dart';
 import 'package:photo_app/Data/services/model/photo_by_tag.dart';
 import 'package:photo_app/Data/services/photo_services.dart';
-import 'package:photo_app/Data/services/model/photos.dart';
+
+import '../services/model/freezed model/photo_class/photo_class.dart';
 
 class PhotoRepository extends IRepository {
   final PhotoServices _photoServices;
@@ -11,7 +12,7 @@ class PhotoRepository extends IRepository {
   PhotoRepository(this._photoServices);
 
   @override
-  Future<List<Photos>> getPhoto([int page = 1]) async {
+  Future<List<Photo>> getPhoto([int page = 1]) async {
     final photo = await _photoServices.getPhoto(page);
     return photo;
   }
